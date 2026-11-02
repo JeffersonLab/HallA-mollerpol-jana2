@@ -1,0 +1,7 @@
+# Default JANA plugins to load
+# Provide a comma-separated list of plugin names.
+# Spaces before/after plugin names are ignored.
+# Example:
+# evio_parser,tracking,monitoring
+# Default plugins
+compton_parser,compton_processor

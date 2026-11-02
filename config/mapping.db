@@ -1,0 +1,7 @@
+# mapping.db defines raw-bank id -> module id mapping for evio_parser.
+# Each non-comment row is: module bank
+# At runtime, evio_parser matches the raw EVIO bank id (bank column)
+# and assigns it to the corresponding module id (module column).
+# module  bank
+  253    595
+  253    253
