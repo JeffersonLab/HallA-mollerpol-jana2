@@ -1,4 +1,4 @@
-# From the Compton source directory: source setup_mollerpol.csh [build [ROOT_PREFIX]].
+# From the Mollerpol source directory: source setup_mollerpol.csh [build [ROOT_PREFIX]].
 # Bash performs the shared build/setup; source its settings in the caller.
 set _mollerpol_ok = 0
 set _mollerpol_env = `mktemp`

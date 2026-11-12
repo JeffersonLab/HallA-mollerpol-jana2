@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# From the Compton source directory: source setup_mollerpol.sh [build [ROOT_PREFIX]].
+# From the Mollerpol source directory: source setup_mollerpol.sh [build [ROOT_PREFIX]].
 # --csh emits settings for the thin setup_mollerpol.csh wrapper.
 _mollerpol_setup() {
     local emit_csh=false
@@ -66,9 +66,15 @@ _mollerpol_setup() {
         cmake --build "$root/build" --parallel >&2 || return 1
         cmake --install "$root/build" >&2 || return 1
     fi
-    if [[ ! -x "$stack/bin/jana" || ! -d "$install/lib/plugins" || ! -d "$install/config" ]]; then
-        echo "JCE or Compton is not installed. Run: source setup_mollerpol.sh build (or source setup_mollerpol.csh build)." >&2
-        return 1
+#    if [[ ! -x "$stack/bin/jana" || ! -d "$install/lib/plugins" || ! -d "$install/config" ]]; then
+#        echo "JCE or Compton is not installed. Run: source setup_mollerpol.sh build (or source setup_mollerpol.csh build)." >&2
+#        return 1
+#    fi
+    # ChatGPT Sug. replacement
+    if [[ ! -x "$stack/bin/jana" ]]; then
+	echo "JCE installation not found: $stack/bin/jana" >&2
+	echo "Check JCE_HOME or build jana2-common-extensions." >&2
+	return 1
     fi
     local plugins="${JANA_PLUGIN_PATH:-}" configs="${JCE_CONFIG_DIR:-}"
     case ":$plugins:" in
@@ -82,10 +88,10 @@ _mollerpol_setup() {
     if $emit_csh; then
         # Single-quoted settings are data, including paths with spaces/quotes.
         local name value
-        for name in JCE_HOME COMPTON_HOME JANA_PLUGIN_PATH JCE_CONFIG_DIR; do
+        for name in JCE_HOME MOLLERPOL_HOME JANA_PLUGIN_PATH JCE_CONFIG_DIR; do
             case "$name" in
                 JCE_HOME) value=$stack ;;
-                COMPTON_HOME) value=$install ;;
+                MOLLERPOL_HOME) value=$install ;;
                 JANA_PLUGIN_PATH) value=$plugins ;;
                 JCE_CONFIG_DIR) value=$configs ;;
             esac
@@ -93,7 +99,7 @@ _mollerpol_setup() {
             printf "setenv %s '%s'\n" "$name" "$value"
         done
     else
-        export JCE_HOME="$stack" COMPTON_HOME="$install"
+        export JCE_HOME="$stack" MOLLERPOL_HOME="$install"
         export JANA_PLUGIN_PATH="$plugins" JCE_CONFIG_DIR="$configs"
     fi
 }
