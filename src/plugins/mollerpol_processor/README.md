@@ -153,7 +153,7 @@ After sourcing `setup_mollerpol.sh` or `setup_mollerpol.csh`, use the installed 
 "${JCE_HOME}/scripts/jce.sh" -Pplugins=mollerpol_processor data.evio
 ```
 
-Produces `mollerpol_processor.root` and `evio_processor_hits.txt` in the current directory.
+Produces `mollerpol_processor.root` and `mollerpol_processor_hits.txt` in the current directory.
 
 ### Custom ROOT output filename
 
