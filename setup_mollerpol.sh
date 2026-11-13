@@ -66,15 +66,9 @@ _mollerpol_setup() {
         cmake --build "$root/build" --parallel >&2 || return 1
         cmake --install "$root/build" >&2 || return 1
     fi
-#    if [[ ! -x "$stack/bin/jana" || ! -d "$install/lib/plugins" || ! -d "$install/config" ]]; then
-#        echo "JCE or Compton is not installed. Run: source setup_mollerpol.sh build (or source setup_mollerpol.csh build)." >&2
-#        return 1
-#    fi
-    # ChatGPT Sug. replacement
-    if [[ ! -x "$stack/bin/jana" ]]; then
-	echo "JCE installation not found: $stack/bin/jana" >&2
-	echo "Check JCE_HOME or build jana2-common-extensions." >&2
-	return 1
+    if [[ ! -x "$stack/bin/jana" || ! -d "$install/lib/plugins" || ! -d "$install/config" ]]; then
+        echo "JCE or Compton is not installed. Run: source setup_mollerpol.sh build (or source setup_mollerpol.csh build)." >&2
+        return 1
     fi
     local plugins="${JANA_PLUGIN_PATH:-}" configs="${JCE_CONFIG_DIR:-}"
     case ":$plugins:" in
